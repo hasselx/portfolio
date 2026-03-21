@@ -35,10 +35,9 @@ const Home = () => {
             <div className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium tracking-wide text-xs sm:text-sm mb-4 sm:mb-6 w-max shadow-sm pointer-events-auto">
               Hello, my name is
             </div>
-            <h1 className="text-[2.5rem] leading-[1.05] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-slate-100 tracking-tighter drop-shadow-lg pointer-events-auto break-words w-full">
-              {line1}
-              <br/>
-              <span className="text-primary tracking-tight drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]">
+            <h1 className="flex flex-col text-[2.2rem] min-[400px]:text-[2.5rem] sm:text-[3.5rem] md:text-[4.2rem] lg:text-[4.5rem] xl:text-[5.2rem] leading-[1.05] sm:leading-[1] font-black tracking-tighter drop-shadow-lg pointer-events-auto w-full max-w-[500px] md:max-w-[600px] xl:max-w-[800px]">
+              <span className="block text-slate-100">{line1}</span>
+              <span className="block text-primary tracking-tight drop-shadow-[0_0_15px_rgba(6,182,212,0.4)] mt-1 sm:mt-2">
                 {line2}.
               </span>
             </h1>

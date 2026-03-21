@@ -1,4 +1,5 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -48,26 +49,28 @@ export const SheetContent = ({ side = "right", className = "", children }) => {
     };
   }, [open]);
   
-  return (
+  const content = (
     <AnimatePresence>
       {open && (
-        <>
+        <React.Fragment key="sheet-portal">
           {/* Dimmed Background Overlay */}
           <motion.div 
+            key="overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 z-[99998] bg-black/80 backdrop-blur-md"
           />
           {/* Animated Sliding Panel */}
           <motion.div 
+            key="panel"
             initial={{ x: side === "right" ? "100%" : "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: side === "right" ? "100%" : "-100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className={`fixed top-0 bottom-0 ${side === "right" ? "right-0" : "left-0"} z-[9999] flex flex-col shadow-2xl ${className}`}
+            className={`fixed top-0 bottom-0 ${side === "right" ? "right-0" : "left-0"} h-[100dvh] z-[99999] flex flex-col shadow-2xl ${className}`}
           >
             {/* Close Button Anchor */}
             <div className="flex justify-end px-4 pt-6">
@@ -80,8 +83,11 @@ export const SheetContent = ({ side = "right", className = "", children }) => {
             </div>
             {children}
           </motion.div>
-        </>
+        </React.Fragment>
       )}
     </AnimatePresence>
   );
+
+  if (typeof document === 'undefined') return null;
+  return createPortal(content, document.body);
 };
