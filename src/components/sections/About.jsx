@@ -13,9 +13,23 @@ const About = () => {
             About Me
           </h2>
           
-          <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-light mb-12 text-center md:text-left">
-            {portfolioData.about}
-          </p>
+          <div className="text-[17px] md:text-lg text-slate-300 leading-[1.8] font-light mb-12 text-center md:text-left space-y-5">
+            <p>
+              Electronics and Computer Engineering graduate focused on <span className="text-slate-100 font-semibold tracking-wide">machine learning</span>, <span className="text-slate-100 font-semibold tracking-wide">signal processing</span>, and intelligent systems.
+            </p>
+            <p>
+              Developed a microwave imaging–based <span className="text-slate-100 font-semibold tracking-wide">tumor detection system</span> with <span className="text-slate-100 font-semibold tracking-wide">96% accuracy</span> and tested & analysed a directional long-range <span className="text-slate-100 font-semibold tracking-wide">IoT communication</span> systems exceeding <span className="text-slate-100 font-semibold tracking-wide">3 km</span>. Contributed to <span className="text-slate-100 font-semibold tracking-wide">peer-reviewed research</span> (<span className="text-slate-100 font-semibold tracking-wide">IEEE</span> and <span className="text-slate-100 font-semibold tracking-wide">MDPI Sensors international journal</span>) and implemented practical solutions in <span className="text-slate-100 font-semibold tracking-wide">healthcare</span> and <span className="text-slate-100 font-semibold tracking-wide">embedded systems</span>.
+            </p>
+            <p>
+              Experienced in system design, programming, and experimental validation, including data-driven platforms and web-based tools for real-world applications.
+            </p>
+            <p>
+              Currently focused on <span className="text-slate-100 font-semibold tracking-wide">Artificial Intelligence</span> and <span className="text-slate-100 font-semibold tracking-wide">Machine Learning</span>, aiming to build <span className="text-slate-100 font-semibold tracking-wide">scalable and impactful engineering solutions</span>.
+            </p>
+            <p className="pt-2 text-primary/90 font-medium italic">
+              Open to opportunities and collaboration.
+            </p>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
