@@ -1,8 +1,106 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Mail, Github, Linkedin, Twitter } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { ArrowDown, Mail, Github, Linkedin, Twitter, Copy, Check, ExternalLink } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
 import PortfolioShader from '../ui/Shader';
+
+const MailPopover = ({ email }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const popoverRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleCopy = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+      setIsOpen(false);
+    }, 1500);
+  };
+
+  const handleMailTo = (e) => {
+    e.stopPropagation();
+    window.open(`mailto:${email}`, '_blank');
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="relative pointer-events-auto" ref={popoverRef}>
+      <button 
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
+        className="group relative text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center focus:outline-none"
+      >
+        <Mail size={18} className="sm:w-[22px] sm:h-[22px]" />
+        
+        {/* Tooltip visible only when closed and hovering */}
+        {!isOpen && (
+          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 text-slate-200 text-[10px] sm:text-xs font-semibold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50">
+            Contact Options
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-800 border-b border-r border-slate-700 rotate-45"></div>
+          </div>
+        )}
+      </button>
+
+      {/* Popover Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-[180px] sm:w-[200px] bg-[#0a192f] border border-primary/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(6,182,212,0.15)] overflow-visible z-[60] flex flex-col"
+          >
+            {/* Popover Arrow */}
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#0a192f] border-b border-r border-primary/30 rotate-45 z-0"></div>
+
+            <div className="relative z-10 p-1 flex flex-col w-full h-full bg-[#0a192f] rounded-xl overflow-hidden">
+              <div className="px-3 py-2 text-[10px] sm:text-[11px] font-bold text-slate-400 font-mono tracking-tight border-b border-slate-800/80 mb-1 w-full truncate text-center">
+                {email}
+              </div>
+
+              <button 
+                onClick={handleCopy}
+                className="w-full flex items-center justify-start gap-3 px-3 py-2.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-primary/10 rounded-lg transition-colors focus:outline-none"
+              >
+                {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} className="text-primary" />}
+                <span className={copied ? "text-emerald-400" : ""}>{copied ? 'Copied!' : 'Copy Email'}</span>
+              </button>
+              
+              <button 
+                onClick={handleMailTo}
+                className="w-full flex items-center justify-start gap-3 px-3 py-2.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-primary/10 rounded-lg transition-colors focus:outline-none"
+              >
+                <ExternalLink size={14} className="text-primary" />
+                <span>Send Email</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const Home = () => {
   const { scrollY } = useScroll();
@@ -54,11 +152,7 @@ const Home = () => {
             </p>
 
             {/* Dynamic Stats Row */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-5 pb-5 border-y border-slate-700/60 pointer-events-auto w-full">
-              <div className="flex flex-col justify-center">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.stats.cgpa}</span>
-                <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">CGPA</span>
-              </div>
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-5 pb-5 border-y border-slate-700/60 pointer-events-auto w-full">
               <div className="flex flex-col justify-center">
                 <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.experience.length}</span>
                 <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">Experiences</span>
@@ -92,7 +186,7 @@ const Home = () => {
               {portfolioData.contact.github && <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Github size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
               {portfolioData.contact.linkedin && <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Linkedin size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
               {portfolioData.contact.twitter && <a href={portfolioData.contact.twitter} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Twitter size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
-              {portfolioData.contact.email && <a href={`mailto:${portfolioData.contact.email}`} className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Mail size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
+              {portfolioData.contact.email && <MailPopover email={portfolioData.contact.email} />}
             </div>
 
           </div>

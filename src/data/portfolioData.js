@@ -77,24 +77,33 @@ export const portfolioData = {
   ],
   projects: [
     {
-      title: "Microwave Imaging for Tumor Detection using Antennas",
+      title: "Microwave Imaging for Tumor Detection",
       year: "2025",
-      description: "Developed a non-invasive tumor detection system using microwave imaging and advanced reconstruction algorithms with real-time diagnostics and cloud-based monitoring.",
-      link: "https://tumors.onrender.com/login?next=https://tumors.onrender.com/",
+      description: "Non-invasive breast tumor detection using microwave imaging and dielectric contrast analysis.",
+      impact: "96% detection accuracy with optimized beamforming and image reconstruction & result within 48secs.",
+      tech: ["MATLAB", "Signal Processing", "Microwave Imaging", "Antenna Systems", "Image Reconstruction", "Ansys"],
+      live: "https://tumors.onrender.com/login?next=https://tumors.onrender.com/",
+      github: "https://github.com/hasselx",
       image: tumorsProjImg
     },
     {
       title: "Academia – Student Productivity Platform",
       year: "2025",
-      description: "Built a student platform with CGPA analysis, attendance tracking, reminders, exam scheduling, and expense management.",
-      link: "https://academialite.lovable.app/",
+      description: "Built a full-stack academic management system for tracking CGPA, attendance, and expenses.",
+      impact: "Improved student workflow with analytics, reminders, and centralized data tracking.",
+      tech: ["React", "Web Development"],
+      live: "https://academialite.lovable.app/",
+      github: "https://github.com/hasselx",
       image: academiaProjImg
     },
     {
       title: "Heypage – Personal Link Manager",
       year: "2026",
-      description: "Created a personal link aggregation platform to organize and share important links across categories.",
-      link: "https://www.heypage.online/",
+      description: "Developed a personal link aggregation platform to organize and share content.",
+      impact: "Enabled centralized access to portfolios, projects, and social links with a clean UI.",
+      tech: ["React", "UI/UX", "Web App"],
+      live: "https://www.heypage.online/",
+      github: "https://github.com/hasselx",
       image: heypageProjImg
     }
   ],
