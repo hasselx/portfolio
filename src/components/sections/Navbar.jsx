@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { portfolioData } from '../../data/portfolioData';
+import { Sheet, SheetTrigger, SheetContent, SheetClose } from '../ui/Sheet';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { name: 'About', href: '#about' },
@@ -59,30 +59,34 @@ const Navbar = () => {
           </div>
 
           <div className="lg:hidden flex items-center">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-slate-300 hover:text-primary focus:outline-none">
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="text-slate-300 hover:text-primary focus:outline-none menu-btn p-2">
+                  <Menu size={28} />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px] bg-[#0a192f] border-l border-slate-800/60">
+                <div className="flex flex-col gap-6 mt-16 px-4">
+                  {navLinks.map((link) => (
+                    <SheetClose asChild key={link.name}>
+                      <a 
+                        href={link.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="text-[18px] font-medium text-[#ccd6f6] transition-all duration-200 ease-out hover:text-[#22d3ee] hover:translate-x-[6px]"
+                      >
+                        {link.name}
+                      </a>
+                    </SheetClose>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-surface border-b border-slate-800 absolute w-full left-0 top-full">
-          <div className="px-4 py-4 space-y-2">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-primary hover:bg-slate-800/50"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
     </nav>
   );
 };
