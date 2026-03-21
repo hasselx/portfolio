@@ -54,9 +54,9 @@ const MailPopover = ({ email }) => {
         
         {/* Tooltip visible only when closed and hovering - Hidden on mobile entirely */}
         {!isOpen && (
-          <div className="absolute bottom-full right-0 sm:left-1/2 sm:-translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 text-slate-200 text-[10px] sm:text-xs font-semibold rounded-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50 hidden md:block">
+          <div className="absolute bottom-full right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 text-slate-200 text-[10px] sm:text-xs font-semibold rounded-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50 hidden md:block">
             Contact Options
-            <div className="absolute -bottom-1 right-[16px] sm:left-1/2 sm:-translate-x-1/2 w-2 h-2 bg-slate-800 border-b border-r border-slate-700 rotate-45"></div>
+            <div className="absolute -bottom-1 right-[16px] sm:right-auto sm:left-1/2 sm:-translate-x-1/2 w-2 h-2 bg-slate-800 border-b border-r border-slate-700 rotate-45"></div>
           </div>
         )}
       </button>
@@ -69,14 +69,14 @@ const MailPopover = ({ email }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute bottom-full right-0 sm:left-1/2 sm:-translate-x-1/2 mb-3.5 w-[160px] sm:w-[170px] bg-slate-900/85 backdrop-blur-xl border border-primary/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(6,182,212,0.15)] overflow-visible z-[60] flex flex-col"
+            className="absolute bottom-full right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mb-3.5 w-[160px] sm:w-[170px] bg-slate-900/85 backdrop-blur-xl border border-primary/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(6,182,212,0.15)] overflow-visible z-[60] flex flex-col"
           >
             {/* Popover Arrow */}
-            <div className="absolute -bottom-1.5 right-[16px] sm:left-1/2 sm:-translate-x-1/2 w-3 h-3 bg-slate-900/90 border-b border-r border-primary/30 rotate-45 z-0"></div>
+            <div className="absolute -bottom-1.5 right-[16px] sm:right-auto sm:left-1/2 sm:-translate-x-1/2 w-3 h-3 bg-slate-900/90 border-b border-r border-primary/30 rotate-45 z-0"></div>
 
             <div className="relative z-10 p-1 flex flex-col w-full h-full bg-transparent rounded-xl overflow-hidden">
-              <div className="px-3 py-2 text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wide border-b border-slate-800/80 mb-1 w-full truncate text-center">
-                {email}
+              <div className="px-3 py-2 text-[11px] font-bold text-slate-400 tracking-wide border-b border-slate-800/80 mb-1 w-full truncate text-center">
+                {email.toLowerCase()}
               </div>
 
               <button 
