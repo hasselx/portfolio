@@ -65,8 +65,8 @@ const Navbar = () => {
                   <Menu size={28} />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] bg-[#0a192f] border-l border-slate-800/60">
-                <div className="flex flex-col gap-6 mt-16 px-4">
+              <SheetContent side="right" className="w-[240px] sm:w-[260px] bg-[#0a192f] text-white border-l border-white/10">
+                <div className="flex flex-col items-end text-right gap-6 mt-8 px-6">
                   {navLinks.map((link) => (
                     <SheetClose asChild key={link.name}>
                       <a 
@@ -75,7 +75,7 @@ const Navbar = () => {
                           e.preventDefault();
                           document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
                         }}
-                        className="text-[18px] font-medium text-[#ccd6f6] transition-all duration-200 ease-out hover:text-[#22d3ee] hover:translate-x-[6px]"
+                        className="w-full text-right py-2 text-[18px] font-medium text-[#ccd6f6] transition-all duration-200 ease-out hover:text-[#22d3ee] hover:-translate-x-[4px]"
                       >
                         {link.name}
                       </a>

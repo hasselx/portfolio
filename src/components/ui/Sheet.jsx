@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, createContext, useContext, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -36,6 +36,17 @@ export const SheetClose = ({ asChild, children }) => {
 
 export const SheetContent = ({ side = "right", className = "", children }) => {
   const { open, setOpen } = useContext(SheetContext);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open]);
   
   return (
     <AnimatePresence>
@@ -48,7 +59,7 @@ export const SheetContent = ({ side = "right", className = "", children }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setOpen(false)}
-            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-md"
           />
           {/* Animated Sliding Panel */}
           <motion.div 
@@ -56,15 +67,17 @@ export const SheetContent = ({ side = "right", className = "", children }) => {
             animate={{ x: 0 }}
             exit={{ x: side === "right" ? "100%" : "-100%" }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className={`fixed top-0 bottom-0 ${side === "right" ? "right-0" : "left-0"} z-50 flex flex-col shadow-2xl ${className}`}
+            className={`fixed top-0 bottom-0 ${side === "right" ? "right-0" : "left-0"} z-[9999] flex flex-col shadow-2xl ${className}`}
           >
             {/* Close Button Anchor */}
-            <button 
-              onClick={() => setOpen(false)}
-              className="absolute top-6 right-6 p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors focus:outline-none"
-            >
-              <X size={20} />
-            </button>
+            <div className="flex justify-end px-4 pt-6">
+              <button 
+                onClick={() => setOpen(false)}
+                className="p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors focus:outline-none"
+              >
+                <X size={20} />
+              </button>
+            </div>
             {children}
           </motion.div>
         </>

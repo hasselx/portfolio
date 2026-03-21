@@ -17,7 +17,7 @@ export const portfolioData = {
   name: "Naveen Krishnan Radhakrishna Pillai",
   title: "Electronics and Computer Engineer",
   tagline: "Building intelligent systems using machine learning, signal processing, and scalable web applications.",
-  about: "Electronics and Computer Engineering graduate with a strong focus on machine learning, signal processing, and applied research. Experience includes developing medical imaging systems, data-driven platforms, and full-stack applications with real-world impact in healthcare and analytics.",
+  about: "Machine learning and signal processing focused Electronics and Computer Engineering graduate, with hands-on experience in medical imaging systems and data-driven applications.\n\nBuilt real-time tumor detection platforms and scalable web tools, combining research and engineering for practical impact in healthcare and analytics.\n\nInterested in solving real-world problems using AI, signal processing, and full-stack systems.",
   stats: {
     cgpa: "7.71",
     experiences: 3,

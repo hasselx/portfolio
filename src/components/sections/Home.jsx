@@ -55,24 +55,41 @@ const Home = () => {
             </p>
 
             {/* Dynamic Stats Row */}
-            <div className="flex justify-between md:grid md:grid-cols-3 gap-2 sm:gap-4 pt-4 pb-4 border-y border-slate-700/60 pointer-events-auto w-full">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-5 pb-5 border-y border-slate-700/60 pointer-events-auto w-full">
               <div className="flex flex-col justify-center">
                 <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.stats.cgpa}</span>
                 <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">CGPA</span>
               </div>
               <div className="flex flex-col justify-center">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.experience.length}+</span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.experience.length}</span>
                 <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">Experiences</span>
               </div>
               <div className="flex flex-col justify-center">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.projects.length}+</span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.projects.length}</span>
                 <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">Projects</span>
               </div>
+              <div className="flex flex-col justify-center">
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.publications.length}</span>
+                <span className="text-[10px] sm:text-xs text-primary drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] uppercase tracking-widest font-bold mt-1">Publications</span>
+              </div>
+            </div>
+
+            {/* Credibility Badges (Research Impact) */}
+            <div className="flex gap-3 flex-wrap pointer-events-auto">
+              <span className="px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs sm:text-sm font-semibold tracking-wide shadow-sm flex items-center gap-1.5 hover:bg-primary/20 transition-colors">MDPI Sensors</span>
+              <span className="px-3 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs sm:text-sm font-semibold tracking-wide shadow-sm flex items-center gap-1.5 hover:bg-primary/20 transition-colors">IEEE</span>
             </div>
             
-            {/* Social Interaction Buttons */}
-            <div className="flex justify-start gap-3 sm:gap-4 flex-wrap pt-2 pointer-events-auto">
-              {portfolioData.contact.heypage && <a href={portfolioData.contact.heypage} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors px-4 py-2 sm:px-6 sm:py-3 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase shadow-lg flex items-center justify-center">HeyPage</a>}
+            {/* Social Interaction Buttons & Resume Download */}
+            <div className="flex justify-start gap-2 sm:gap-4 flex-wrap pt-4 pointer-events-auto">
+              <a 
+                href="/Naveen_Krishnan_Resume.pdf" 
+                download="Naveen_Krishnan_Resume.pdf"
+                className="text-primary hover:text-[#0a192f] bg-transparent hover:bg-primary transition-all p-2 sm:p-3 px-4 sm:px-6 border-2 border-primary hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:-translate-y-1 rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase shadow-lg flex items-center justify-center cursor-pointer gap-2"
+              >
+                Resume <ArrowDown size={16} className="sm:w-[18px] sm:h-[18px]" />
+              </a>
+              {portfolioData.contact.heypage && <a href={portfolioData.contact.heypage} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full font-bold text-[18px] sm:text-[20px] shadow-lg flex items-center justify-center font-sans tracking-tighter">H</a>}
               {portfolioData.contact.github && <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Github size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
               {portfolioData.contact.linkedin && <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Linkedin size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
               {portfolioData.contact.twitter && <a href={portfolioData.contact.twitter} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Twitter size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
