@@ -48,15 +48,15 @@ const MailPopover = ({ email }) => {
           e.stopPropagation();
           setIsOpen(!isOpen);
         }}
-        className="group relative text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center focus:outline-none"
+        className="group relative text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center focus:outline-none"
       >
-        <Mail size={18} className="sm:w-[22px] sm:h-[22px]" />
+        <Mail size={18} className="sm:w-[20px] sm:h-[20px]" />
         
-        {/* Tooltip visible only when closed and hovering */}
+        {/* Tooltip visible only when closed and hovering - Hidden on mobile entirely */}
         {!isOpen && (
-          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 text-slate-200 text-[10px] sm:text-xs font-semibold rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50">
+          <div className="absolute bottom-full right-0 sm:left-1/2 sm:-translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 text-slate-200 text-[10px] sm:text-xs font-semibold rounded-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50 hidden md:block">
             Contact Options
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-800 border-b border-r border-slate-700 rotate-45"></div>
+            <div className="absolute -bottom-1 right-[16px] sm:left-1/2 sm:-translate-x-1/2 w-2 h-2 bg-slate-800 border-b border-r border-slate-700 rotate-45"></div>
           </div>
         )}
       </button>
@@ -69,13 +69,13 @@ const MailPopover = ({ email }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-[180px] sm:w-[200px] bg-[#0a192f] border border-primary/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(6,182,212,0.15)] overflow-visible z-[60] flex flex-col"
+            className="absolute bottom-full right-0 sm:left-1/2 sm:-translate-x-1/2 mb-3.5 w-[160px] sm:w-[170px] bg-slate-900/85 backdrop-blur-xl border border-primary/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(6,182,212,0.15)] overflow-visible z-[60] flex flex-col"
           >
             {/* Popover Arrow */}
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#0a192f] border-b border-r border-primary/30 rotate-45 z-0"></div>
+            <div className="absolute -bottom-1.5 right-[16px] sm:left-1/2 sm:-translate-x-1/2 w-3 h-3 bg-slate-900/90 border-b border-r border-primary/30 rotate-45 z-0"></div>
 
-            <div className="relative z-10 p-1 flex flex-col w-full h-full bg-[#0a192f] rounded-xl overflow-hidden">
-              <div className="px-3 py-2 text-[10px] sm:text-[11px] font-bold text-slate-400 font-mono tracking-tight border-b border-slate-800/80 mb-1 w-full truncate text-center">
+            <div className="relative z-10 p-1 flex flex-col w-full h-full bg-transparent rounded-xl overflow-hidden">
+              <div className="px-3 py-2 text-[10px] uppercase font-bold text-slate-400 font-mono tracking-wide border-b border-slate-800/80 mb-1 w-full truncate text-center">
                 {email}
               </div>
 
@@ -174,18 +174,18 @@ const Home = () => {
             </div>
             
             {/* Social Interaction Buttons & Resume Download */}
-            <div className="flex justify-start gap-2 sm:gap-4 flex-wrap pt-4 pointer-events-auto">
+            <div className="flex justify-center md:justify-start gap-2 sm:gap-4 flex-wrap pt-6 sm:pt-8 pb-4 pointer-events-auto w-full">
               <a 
                 href="/Naveen_Krishnan_Resume.pdf" 
                 download="Naveen_Krishnan_Resume.pdf"
-                className="text-primary hover:text-[#0a192f] bg-transparent hover:bg-primary transition-all p-2 sm:p-3 px-4 sm:px-6 border-2 border-primary hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:-translate-y-1 rounded-full font-bold text-xs sm:text-sm tracking-widest uppercase shadow-lg flex items-center justify-center cursor-pointer gap-2"
+                className="text-primary hover:text-[#0a192f] bg-transparent hover:bg-primary transition-all p-2 sm:p-3 px-4 sm:px-6 border-2 border-primary hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:-translate-y-1 rounded-full font-bold text-[11px] sm:text-xs tracking-widest uppercase shadow-lg flex items-center justify-center cursor-pointer gap-2 h-11 sm:h-12"
               >
-                Resume <ArrowDown size={16} className="sm:w-[18px] sm:h-[18px]" />
+                Resume <ArrowDown size={14} className="sm:w-[16px] sm:h-[16px]" />
               </a>
-              {portfolioData.contact.heypage && <a href={portfolioData.contact.heypage} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full font-bold text-[18px] sm:text-[20px] shadow-lg flex items-center justify-center font-sans tracking-tighter">H</a>}
-              {portfolioData.contact.github && <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Github size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
-              {portfolioData.contact.linkedin && <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Linkedin size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
-              {portfolioData.contact.twitter && <a href={portfolioData.contact.twitter} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Twitter size={18} className="sm:w-[22px] sm:h-[22px]" /></a>}
+              {portfolioData.contact.heypage && <a href={portfolioData.contact.heypage} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full font-bold text-[15px] sm:text-[18px] shadow-lg flex items-center justify-center font-sans tracking-tighter">H</a>}
+              {portfolioData.contact.github && <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Github size={18} className="sm:w-[20px] sm:h-[20px]" /></a>}
+              {portfolioData.contact.linkedin && <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Linkedin size={18} className="sm:w-[20px] sm:h-[20px]" /></a>}
+              {portfolioData.contact.twitter && <a href={portfolioData.contact.twitter} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Twitter size={18} className="sm:w-[20px] sm:h-[20px]" /></a>}
               {portfolioData.contact.email && <MailPopover email={portfolioData.contact.email} />}
             </div>
 
