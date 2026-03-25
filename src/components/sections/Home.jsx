@@ -153,17 +153,26 @@ const Home = () => {
 
             {/* Dynamic Stats Row */}
             <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-5 pb-5 border-y border-slate-700/60 pointer-events-auto w-full">
-              <div className="flex flex-col justify-center">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.experience.length}</span>
-                <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">Experiences</span>
+              <div 
+                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col justify-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] p-2 -m-2 sm:p-3 sm:-m-3 rounded-xl border border-transparent hover:border-primary/20 hover:bg-slate-800/40 group"
+              >
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight group-hover:text-primary transition-colors">{portfolioData.experience.length}</span>
+                <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1 group-hover:drop-shadow-[0_0_10px_rgba(6,182,212,0.5)] transition-all">Experiences</span>
               </div>
-              <div className="flex flex-col justify-center">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.projects.length}</span>
-                <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1">Projects</span>
+              <div 
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col justify-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] p-2 -m-2 sm:p-3 sm:-m-3 rounded-xl border border-transparent hover:border-primary/20 hover:bg-slate-800/40 group"
+              >
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight group-hover:text-primary transition-colors">{portfolioData.projects.length}</span>
+                <span className="text-[10px] sm:text-xs text-primary uppercase tracking-widest font-bold mt-1 group-hover:drop-shadow-[0_0_10px_rgba(6,182,212,0.5)] transition-all">Projects</span>
               </div>
-              <div className="flex flex-col justify-center">
-                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight">{portfolioData.publications.length}</span>
-                <span className="text-[10px] sm:text-xs text-primary drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] uppercase tracking-widest font-bold mt-1">Publications</span>
+              <div 
+                onClick={() => document.getElementById('publications')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col justify-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] p-2 -m-2 sm:p-3 sm:-m-3 rounded-xl border border-transparent hover:border-primary/20 hover:bg-slate-800/40 group"
+              >
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight group-hover:text-primary transition-colors">{portfolioData.publications.length}</span>
+                <span className="text-[10px] sm:text-xs text-primary drop-shadow-[0_0_15px_rgba(6,182,212,0.5)] uppercase tracking-widest font-bold mt-1 group-hover:drop-shadow-[0_0_20px_rgba(6,182,212,0.8)] transition-all">Publications</span>
               </div>
             </div>
 
