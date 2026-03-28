@@ -30,8 +30,12 @@ const Experience = () => {
             index={index} 
             data={{
               duration: exp.duration, 
-              title: exp.role, 
-              organization: exp.company,
+              title: (
+                <span className="font-normal">
+                  {exp.role} at <span className="text-cyan-400 font-semibold">{exp.organization}</span>
+                </span>
+              ),
+              organization: null,
               description: exp.description,
               preview: exp.preview,
               link: exp.link

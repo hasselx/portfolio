@@ -57,10 +57,6 @@ export const TimelineItem = ({ index, data }) => {
       {/* Mobile Layout: Stacked Single Column */}
       <a href={data.link} target="_blank" rel="noreferrer" className="md:hidden flex flex-col w-full pl-12 relative z-10 outline-none cursor-pointer block">
          <TimelineContent data={data} align="left" isMobile />
-         <div className="mt-4">
-           {/* Image unconditionally visible below on mobile since hover is disabled */}
-           <TimelineImage data={data} align="left" isMobile isVisible={true} />
-         </div>
       </a>
 
     </div>
@@ -74,13 +70,31 @@ const TimelineContent = ({ data, align, isMobile }) => (
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
     transition={{ duration: 0.6, ease: "easeOut" }}
-    className={`w-full max-w-xl h-full flex flex-col justify-center bg-surface border border-slate-700/60 p-6 md:p-8 lg:p-10 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-all duration-300 group ${align === 'right' ? 'text-right' : 'text-left'} hover:border-primary/40 hover:shadow-primary/10 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]`}
+    className={`relative overflow-hidden w-full max-w-xl h-full bg-surface border border-slate-700/60 p-6 md:p-8 lg:p-10 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-all duration-300 group ${align === 'right' ? 'text-right' : 'text-left'} hover:border-primary/40 hover:shadow-primary/10 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(6,182,212,0.2)]`}
   >
-    <div className={`text-primary font-mono text-sm mb-3 font-semibold tracking-wide drop-shadow-[0_0_8px_rgba(6,182,212,0.4)] ${align === 'right' ? 'ml-auto' : ''}`}>{data.duration}</div>
-    <h3 className="text-xl lg:text-2xl font-bold text-slate-100 group-hover:text-primary transition-colors tracking-tight">{data.title}</h3>
-    <h4 className={`text-md lg:text-lg text-slate-300 font-medium mb-4 mt-2 inline-block border-b border-slate-700 pb-1 ${align === 'right' ? 'ml-auto' : ''}`}>{data.organization}</h4>
-    {data.description && <p className="text-slate-400 text-sm md:text-base leading-relaxed font-light">{data.description}</p>}
-    {data.score && <p className={`text-slate-300 text-sm leading-relaxed font-medium mt-3 bg-slate-800/80 inline-block px-3 py-1 rounded-md border border-slate-700 ${align === 'right' ? 'ml-auto' : ''}`}>Score: <span className="text-primary tracking-wide drop-shadow-sm">{data.score}</span></p>}
+    {/* Background layers (mobile only) */}
+    {/* Background layers (mobile only) */}
+    {data.preview && (
+      <>
+        {/* Softened background image */}
+        <img 
+          src={data.preview} 
+          alt="" 
+          className="absolute inset-0 w-full h-full object-cover brightness-[0.85] contrast-[1.1] scale-[1.05] pointer-events-none md:hidden" 
+        />
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a]/55 to-[#0f172a]/75 pointer-events-none md:hidden" />
+      </>
+    )}
+
+    {/* Content layer */}
+    <div className="relative z-10 flex flex-col justify-center h-full w-full">
+      <div className={`text-primary font-mono text-sm mb-3 font-semibold tracking-wide drop-shadow-[0_0_8px_rgba(6,182,212,0.4)] ${align === 'right' ? 'ml-auto' : ''}`}>{data.duration}</div>
+      <h3 className="text-xl lg:text-2xl font-bold text-slate-100 group-hover:text-primary transition-colors tracking-tight">{data.title}</h3>
+      {data.organization && <h4 className={`text-md lg:text-lg text-slate-300 font-medium mb-4 mt-2 inline-block border-b border-slate-700 pb-1 ${align === 'right' ? 'ml-auto' : ''}`}>{data.organization}</h4>}
+      {data.description && <p className="text-slate-400 text-sm md:text-base leading-relaxed font-light">{data.description}</p>}
+      {data.score && <p className={`text-slate-300 text-sm leading-relaxed font-medium mt-3 bg-slate-800/80 inline-block px-3 py-1 rounded-md border border-slate-700 ${align === 'right' ? 'ml-auto' : ''}`}>Score: <span className="text-primary tracking-wide drop-shadow-sm">{data.score}</span></p>}
+    </div>
   </motion.div>
 );
 
