@@ -34,9 +34,9 @@ const About = () => {
                       loop
                       muted
                       playsInline
-                      className="w-full h-full object-cover rounded-full"
+                      className="w-full h-full object-contain"
                     >
-                      <source src="/src/static/Video/2mebm.webm" type="video/webm" />
+                      <source src="/video/2mebm.webm" type="video/webm" />
                     </video>
                   </div>
                 </div>
