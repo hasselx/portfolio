@@ -21,7 +21,7 @@ function App() {
         {/* Global animated background */}
         <div className="fixed inset-0 z-[-1] pointer-events-none">
           <StarryDots
-            count={80}
+            count={50}
             minSize={1}
             maxSize={2.2}
             minOpacity={0.28}
