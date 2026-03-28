@@ -27,18 +27,16 @@ const About = () => {
                 }
               `}</style>
               <div className="about-video-wrapper">
-                <div className="w-[160px] h-[160px] md:w-[240px] md:h-[240px] rounded-full bg-[#0f172a] flex items-center justify-center overflow-hidden border-2 border-[rgba(0,255,255,0.2)] shadow-[0_0_40px_rgba(0,255,255,0.08)] hover:scale-105 transition-transform duration-500">
-                  <div className="w-[85%] h-[85%] rounded-full overflow-hidden flex items-center justify-center">
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-contain"
-                    >
-                      <source src="/video/2mebm.webm" type="video/webm" />
-                    </video>
-                  </div>
+                <div className="w-[160px] h-[160px] md:w-[220px] md:h-[220px] rounded-full overflow-hidden border border-cyan-500/30 shadow-[0_0_40px_rgba(0,255,255,0.08)] flex items-center justify-center hover:scale-105 transition-transform duration-500">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover object-center"
+                  >
+                    <source src="/video/2mebm.webm" type="video/webm" />
+                  </video>
                 </div>
               </div>
             </div>
