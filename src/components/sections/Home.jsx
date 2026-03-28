@@ -102,6 +102,81 @@ const MailPopover = ({ email }) => {
   );
 };
 
+const ResumePopover = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const popoverRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleView = (e) => {
+    e.stopPropagation();
+    window.open("/Naveen_Krishnan_Resume.pdf", "_blank");
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="relative pointer-events-auto" ref={popoverRef}>
+      <button 
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsOpen(!isOpen);
+        }}
+        className="text-primary hover:text-[#0a192f] bg-transparent hover:bg-primary transition-all p-2 sm:p-3 px-4 sm:px-6 border-2 border-primary hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:-translate-y-1 rounded-full font-bold text-[11px] sm:text-xs tracking-widest uppercase shadow-lg flex items-center justify-center cursor-pointer gap-2 h-11 sm:h-12 w-max focus:outline-none"
+      >
+        Resume <ArrowDown size={14} className="sm:w-[16px] sm:h-[16px]" />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute bottom-full left-0 mb-3.5 w-[170px] bg-slate-900/85 backdrop-blur-xl border border-primary/30 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(6,182,212,0.15)] overflow-visible z-[60] flex flex-col"
+          >
+            {/* Popover Arrow */}
+            <div className="absolute -bottom-1.5 left-10 w-3 h-3 bg-slate-900/90 border-b border-r border-primary/30 rotate-45 z-0"></div>
+
+            <div className="relative z-10 p-1 flex flex-col w-full h-full bg-transparent rounded-xl overflow-hidden">
+              <button 
+                onClick={handleView}
+                className="w-full flex items-center justify-start gap-3 px-3 py-2.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-primary/10 rounded-lg transition-colors focus:outline-none"
+              >
+                <ExternalLink size={14} className="text-primary" />
+                <span>View Resume</span>
+              </button>
+              
+              <a 
+                href="/Naveen_Krishnan_Resume.pdf"
+                download="Naveen_Krishnan_Resume.pdf"
+                onClick={() => setIsOpen(false)}
+                className="w-full flex items-center justify-start gap-3 px-3 py-2.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-primary/10 rounded-lg transition-colors focus:outline-none"
+              >
+                <ArrowDown size={14} className="text-primary" />
+                <span>Download Resume</span>
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const Home = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 800], [0, 150]);
@@ -184,13 +259,7 @@ const Home = () => {
             
             {/* Social Interaction Buttons & Resume Download */}
             <div className="flex justify-center md:justify-start gap-2 sm:gap-4 flex-wrap pt-6 sm:pt-8 pb-4 pointer-events-auto w-full">
-              <a 
-                href="/Naveen_Krishnan_Resume.pdf" 
-                download="Naveen_Krishnan_Resume.pdf"
-                className="text-primary hover:text-[#0a192f] bg-transparent hover:bg-primary transition-all p-2 sm:p-3 px-4 sm:px-6 border-2 border-primary hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:-translate-y-1 rounded-full font-bold text-[11px] sm:text-xs tracking-widest uppercase shadow-lg flex items-center justify-center cursor-pointer gap-2 h-11 sm:h-12"
-              >
-                Resume <ArrowDown size={14} className="sm:w-[16px] sm:h-[16px]" />
-              </a>
+              <ResumePopover />
               {portfolioData.contact.heypage && <a href={portfolioData.contact.heypage} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full font-bold text-[15px] sm:text-[18px] shadow-lg flex items-center justify-center font-sans tracking-tighter">H</a>}
               {portfolioData.contact.github && <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Github size={18} className="sm:w-[20px] sm:h-[20px]" /></a>}
               {portfolioData.contact.linkedin && <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-primary transition-colors w-11 h-11 sm:w-12 sm:h-12 hover:bg-slate-800/80 border border-slate-700 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-1 transition-all rounded-full shadow-lg flex items-center justify-center"><Linkedin size={18} className="sm:w-[20px] sm:h-[20px]" /></a>}
