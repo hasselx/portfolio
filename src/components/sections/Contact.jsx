@@ -128,7 +128,7 @@ const Contact = () => {
         </div>
 
         {/* CTA Row */}
-        <div className="order-2 md:order-4 flex flex-row items-center justify-center gap-4 md:gap-6 mt-16 md:mt-4 mb-8 md:mb-0 flex-wrap">
+        <div className="order-2 md:order-4 flex flex-row items-center justify-center gap-4 md:gap-6 mt-[120px] md:mt-4 mb-8 md:mb-0 flex-wrap">
           
           <a 
             href={`mailto:${portfolioData.contact.email}`} 
