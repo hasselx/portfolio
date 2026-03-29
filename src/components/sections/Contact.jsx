@@ -11,13 +11,13 @@ const mapMarkers = [
     lat: 8.5241,
     lng: 76.9366,
     size: 2.0,
-    overlay: { countryCode: "in", label: "Kerala" },
+    overlay: { countryCode: "in", label: "Kerala", align: "left" },
   },
   {
     lat: 49.7596,
     lng: 6.6441,
     size: 2.0,
-    overlay: { countryCode: "de", label: "Trier" },
+    overlay: { countryCode: "de", label: "Trier", align: "right" },
   },
 ];
 
@@ -58,18 +58,23 @@ const Contact = () => {
           <DottedMap
             preserveAspectRatio="xMidYMid meet"
             markers={mapMarkers}
-            mapSamples={1500}
+            mapSamples={4000}
             dotColor="rgba(255, 255, 255, 0.4)"
-            className="w-full h-[60%] sm:h-[80%] lg:h-full object-contain"
+            className="w-full h-[65%] sm:h-[80%] lg:h-full object-contain"
             renderMarkerOverlay={({ marker, x, y, r, index }) => {
-            const { countryCode, label } = marker.overlay;
+            const { countryCode, label, align = "right" } = marker.overlay;
             const href = `https://flagcdn.com/w80/${countryCode}.webp`;
             const clipId = `flag-clip-${index}`;
             const imgR = r * 0.75;
             const fontSize = r * 0.65;
             const pillH = r * 1.35;
             const pillW = label.length * (fontSize * 0.6) + r * 1.3;
-            const pillX = x + r + r * 0.5;
+            
+            // Re-calculate X position dynamically based on required alignment direction
+            const pillX = align === "left" 
+                ? x - r - r * 0.5 - pillW 
+                : x + r + r * 0.5;
+                
             const pillY = y - pillH / 2;
             return (
               <g style={{ pointerEvents: "none" }}>
@@ -109,27 +114,27 @@ const Contact = () => {
       </div>
 
       <div className="max-w-[1200px] mx-auto flex flex-col items-center justify-center text-center pt-[100px] pb-[80px] sm:pt-[220px] sm:pb-[150px] relative z-20 mt-2 sm:mt-10">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-100 mb-6 sm:mb-8 tracking-tight drop-shadow-md">Get In Touch</h2>
+        <h2 className="order-1 text-4xl md:text-5xl lg:text-6xl font-black text-slate-100 mb-6 sm:mb-8 tracking-tight drop-shadow-md">Get In Touch</h2>
         
-        <p className="text-slate-400 mb-10 text-lg md:text-xl leading-relaxed font-light max-w-[650px] mx-auto">
+        <p className="order-4 md:order-2 text-slate-400 mt-12 mb-0 md:mt-0 md:mb-10 text-lg md:text-xl leading-relaxed font-light max-w-[650px] mx-auto">
           Open to internships, research roles, and machine learning opportunities. Feel free to reach out for collaboration.
         </p>
         
         {/* Social Links Sub-Grid */}
-        <div className="flex items-center justify-center gap-6 mb-12 flex-wrap">
+        <div className="order-3 md:order-3 flex items-center justify-center gap-6 mb-8 md:mb-12 flex-wrap">
           {portfolioData.contact.email && <a href={`mailto:${portfolioData.contact.email}`} className="text-slate-400 hover:text-primary hover:drop-shadow-[0_0_10px_rgba(6,182,212,0.4)] transition-all hover:-translate-y-1 p-2 rounded-full border border-transparent hover:border-primary/30 hover:bg-slate-800/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>}
           {portfolioData.contact.linkedin && <a href={portfolioData.contact.linkedin} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-primary hover:drop-shadow-[0_0_10px_rgba(6,182,212,0.4)] transition-all hover:-translate-y-1 p-2 rounded-full border border-transparent hover:border-primary/30 hover:bg-slate-800/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>}
           {portfolioData.contact.github && <a href={portfolioData.contact.github} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-primary hover:drop-shadow-[0_0_10px_rgba(6,182,212,0.4)] transition-all hover:-translate-y-1 p-2 rounded-full border border-transparent hover:border-primary/30 hover:bg-slate-800/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>}
         </div>
 
         {/* CTA Row */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-2 flex-wrap">
+        <div className="order-2 md:order-4 flex flex-row items-center justify-center gap-4 md:gap-6 mt-16 md:mt-4 mb-8 md:mb-0 flex-wrap">
           
           <a 
             href={`mailto:${portfolioData.contact.email}`} 
-            className="inline-flex items-center justify-center px-12 py-4 rounded-xl bg-transparent border-2 border-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 pointer-events-auto"
+            className="inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-3.5 rounded-xl bg-transparent border-2 border-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 pointer-events-auto"
           >
-            <ComicText fontSize={1.5}>SAY HELLO!</ComicText>
+            <ComicText fontSize={1.15}>SAY HELLO!</ComicText>
           </a>
 
           {/* Main Interactive Avatar */}
@@ -146,7 +151,7 @@ const Contact = () => {
               <img 
                 src={mainAvatar} 
                 alt="Naveen krishnan R" 
-                className="w-[72px] h-[72px] rounded-full object-cover border-2 border-slate-800 transition-all duration-300 hover:scale-[1.08] hover:border-primary shadow-lg hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] cursor-pointer"
+                className="w-[56px] h-[56px] md:w-[64px] md:h-[64px] rounded-full object-cover border-2 border-slate-800 transition-all duration-300 hover:scale-[1.08] hover:border-primary shadow-lg hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] cursor-pointer"
               />
             </a>
 

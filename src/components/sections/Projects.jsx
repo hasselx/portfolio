@@ -52,33 +52,36 @@ const Projects = () => {
       <AnimatePresence>
         {active && typeof active === "object" ? (
           <div 
-            className="fixed inset-0 grid place-items-center p-4 sm:p-8 z-[110] pointer-events-none"
+            className="fixed inset-0 flex items-end sm:items-center justify-center p-0 sm:p-8 z-[110] pointer-events-none"
             data-lenis-prevent="true"
           >
             
-            {/* Modal Body */}
-            {/* We removed layoutId here on the wrapper so it doesn't do the reverse layout scale shrink, instead fades out instantly on close while opening layout smoothly */}
+            {/* Modal Body: Bottom sheet on mobile, centered modal on desktop */}
             <motion.div
               layoutId={active ? `card-${active.title}-${id}` : undefined}
-              exit={{ opacity: 0, transition: { duration: 0.15 } }}
+              exit={{ opacity: 0, y: 50, transition: { duration: 0.15 } }}
               ref={ref}
-              className="w-full max-w-[95vw] sm:max-w-3xl mx-auto h-auto max-h-[85vh] sm:max-h-[80vh] flex flex-col bg-[#0a192f] border border-slate-700 rounded-3xl overflow-hidden pointer-events-auto shadow-[0_0_40px_rgba(6,182,212,0.15)] relative overscroll-contain"
+              className="w-full sm:max-w-3xl mx-auto h-[85dvh] sm:h-auto max-h-[85dvh] sm:max-h-[80vh] flex flex-col bg-[#0a192f] border-t sm:border border-slate-700 rounded-t-3xl sm:rounded-3xl overflow-hidden pointer-events-auto shadow-[0_-10px_40px_rgba(6,182,212,0.15)] sm:shadow-[0_0_40px_rgba(6,182,212,0.15)] relative overscroll-contain"
             >
+              
+              {/* Mobile Drawer Handle Cue */}
+              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-12 h-1.5 bg-slate-600 rounded-full z-[130] sm:hidden pointer-events-none opacity-80" />
+
               {/* Unified Close Button */}
               <button
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center justify-center bg-slate-900/60 hover:bg-slate-800 rounded-full h-8 w-8 sm:h-10 sm:w-10 pointer-events-auto border border-slate-700/50 backdrop-blur-md z-[120] transition-colors shadow-lg"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 flex items-center justify-center bg-slate-900/80 hover:bg-slate-800 rounded-full h-9 w-9 sm:h-10 sm:w-10 pointer-events-auto border border-slate-700/50 backdrop-blur-md z-[130] transition-colors shadow-lg"
                 onClick={() => setActive(null)}
               >
-                <X size={18} strokeWidth={2.5} className="text-slate-200" />
+                <X size={20} strokeWidth={2.5} className="text-slate-200" />
               </button>
 
               {/* Dynamic Image Header (Fixed Height) */}
               <motion.div layoutId={`image-${active.title}-${id}`} className="shrink-0 w-full relative">
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] to-transparent bg-blend-multiply opacity-60 z-10 bottom-0 top-auto h-24 pointer-events-none"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-transparent to-black/30 bg-blend-multiply opacity-60 z-10 bottom-0 top-0 pointer-events-none"></div>
                 <img
                   src={active.image || active.preview}
                   alt={active.title}
-                  className="w-full h-[200px] sm:h-[260px] object-cover object-top"
+                  className="w-full h-[220px] sm:h-[260px] object-cover object-top"
                 />
               </motion.div>
 
