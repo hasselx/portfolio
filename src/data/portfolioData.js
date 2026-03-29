@@ -1,10 +1,10 @@
-import btechImg from '../static/Education/btech.png';
-import higherSecImg from '../static/Education/higher secondary.png';
-import secImg from '../static/Education/secondary.png';
+import btechImg from '../static/Education/btechlogo.png';
+import higherSecImg from '../static/Education/higher secondary logo.png';
+import secImg from '../static/Education/secondary logo.png';
 
-import feamImg from '../static/Experience/FEAM.png';
-import ammachiImg from '../static/Experience/AMMACHILABS.png';
-import tibsImg from '../static/Experience/TIBS.png';
+import feamImg from '../static/Experience/FEAMlogo.jpg';
+import ammachiImg from '../static/Experience/AMMACHILABS logo.png';
+import tibsImg from '../static/Experience/TIBS logo.jpg';
 
 import tumorsProjImg from '../static/Project/TUMORS.png';
 import academiaProjImg from '../static/Project/Academia.png';

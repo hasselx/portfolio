@@ -2,8 +2,7 @@ import React from 'react';
 import Navbar from './components/sections/Navbar';
 import Home from './components/sections/Home';
 import About from './components/sections/About';
-import Education from './components/sections/Education';
-import Experience from './components/sections/Experience';
+import Journey from './components/sections/Journey';
 import Projects from './components/sections/Projects';
 import Publications from './components/sections/Publications';
 import Volunteering from './components/sections/Volunteering';
@@ -37,8 +36,7 @@ function App() {
         <main className="w-full relative z-10">
           <Home />
           <About />
-          <Education />
-          <Experience />
+          <Journey />
           <Projects />
           <Publications />
           <Volunteering />

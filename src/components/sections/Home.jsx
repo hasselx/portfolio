@@ -229,7 +229,7 @@ const Home = () => {
             {/* Dynamic Stats Row */}
             <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-5 pb-5 border-y border-slate-700/60 pointer-events-auto w-full">
               <div 
-                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('journey')?.scrollIntoView({ behavior: 'smooth' })}
                 className="flex flex-col justify-center cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] p-2 -m-2 sm:p-3 sm:-m-3 rounded-xl border border-transparent hover:border-primary/20 hover:bg-slate-800/40 group"
               >
                 <span className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-100 tracking-tight group-hover:text-primary transition-colors">{portfolioData.experience.length}</span>

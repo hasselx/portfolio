@@ -3,14 +3,85 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../../data/portfolioData';
 import SectionWrapper from '../ui/SectionWrapper';
 import mainAvatar from '../../static/avatar/icon2.jpg';
+import { ComicText } from '../ui/comic-text';
+import { DottedMap } from '../ui/dotted-map';
+
+const mapMarkers = [
+  {
+    lat: 8.5241,
+    lng: 76.9366,
+    size: 2.0,
+    overlay: { countryCode: "in", label: "Kerala" },
+  },
+  {
+    lat: 49.7596,
+    lng: 6.6441,
+    size: 2.0,
+    overlay: { countryCode: "de", label: "Trier" },
+  },
+];
 
 const Contact = () => {
   const [hovered, setHovered] = useState(false);
 
   return (
     <SectionWrapper id="contact">
-      <div className="max-w-[1200px] mx-auto flex flex-col items-center justify-center text-center py-[100px] pb-[120px]">
-        <h2 className="text-5xl md:text-6xl font-black text-slate-100 mb-8 tracking-tight">Get In Touch</h2>
+      {/* Dynamic Background SVG Map Layer */}
+      <div className="absolute inset-0 z-0 overflow-visible pointer-events-none scale-[2.5] sm:scale-[1.5] lg:scale-125 opacity-100 mix-blend-screen">
+        <div className="absolute inset-0 z-10" style={{ background: "radial-gradient(circle at center, transparent 15%, #0a192f 70%)" }} />
+        <DottedMap
+          markers={mapMarkers}
+          mapSamples={3500}
+          dotColor="rgba(255, 255, 255, 0.25)"
+          className="w-full h-full"
+          renderMarkerOverlay={({ marker, x, y, r, index }) => {
+            const { countryCode, label } = marker.overlay;
+            const href = `https://flagcdn.com/w80/${countryCode}.webp`;
+            const clipId = `flag-clip-${index}`;
+            const imgR = r * 0.75;
+            const fontSize = r * 0.65;
+            const pillH = r * 1.35;
+            const pillW = label.length * (fontSize * 0.6) + r * 1.3;
+            const pillX = x + r + r * 0.5;
+            const pillY = y - pillH / 2;
+            return (
+              <g style={{ pointerEvents: "none" }}>
+                <clipPath id={clipId}>
+                  <circle cx={x} cy={y} r={imgR} />
+                </clipPath>
+                <image
+                  href={href}
+                  x={x - imgR}
+                  y={y - imgR}
+                  width={imgR * 2}
+                  height={imgR * 2}
+                  preserveAspectRatio="xMidYMid slice"
+                  clipPath={`url(#${clipId})`}
+                />
+                <rect
+                  x={pillX}
+                  y={pillY}
+                  width={pillW}
+                  height={pillH}
+                  rx={pillH / 2}
+                  fill="rgba(0,0,0,0.55)"
+                />
+                <text
+                  x={pillX + r * 0.7}
+                  y={y + fontSize * 0.35}
+                  fontSize={fontSize}
+                  fill="white"
+                >
+                  {label}
+                </text>
+              </g>
+            );
+          }}
+        />
+      </div>
+
+      <div className="max-w-[1200px] mx-auto flex flex-col items-center justify-center text-center pt-[140px] pb-[100px] sm:pt-[220px] sm:pb-[150px] relative z-20 mt-10">
+        <h2 className="text-5xl md:text-6xl font-black text-slate-100 mb-8 tracking-tight drop-shadow-md">Get In Touch</h2>
         
         <p className="text-slate-400 mb-10 text-lg md:text-xl leading-relaxed font-light max-w-[650px] mx-auto">
           Open to internships, research roles, and machine learning opportunities. Feel free to reach out for collaboration.
@@ -28,9 +99,9 @@ const Contact = () => {
           
           <a 
             href={`mailto:${portfolioData.contact.email}`} 
-            className="inline-block px-12 py-4 rounded-xl bg-transparent border-2 border-primary text-primary font-bold text-lg hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 pointer-events-auto"
+            className="inline-flex items-center justify-center px-12 py-4 rounded-xl bg-transparent border-2 border-primary hover:bg-primary/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 pointer-events-auto"
           >
-            Say Hello
+            <ComicText fontSize={1.5}>SAY HELLO!</ComicText>
           </a>
 
           {/* Main Interactive Avatar */}
