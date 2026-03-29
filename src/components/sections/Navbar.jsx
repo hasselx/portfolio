@@ -37,7 +37,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-md border-b border-slate-800 shadow-sm py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${isScrolled ? 'bg-background/90 backdrop-blur-md border-b border-slate-800 shadow-sm py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
@@ -57,10 +57,10 @@ const Navbar = () => {
             })}
           </div>
 
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center relative z-[110]">
             <Sheet>
               <SheetTrigger asChild>
-                <button className="text-slate-300 hover:text-primary focus:outline-none menu-btn p-2">
+                <button className="text-slate-100 hover:text-primary focus:outline-none menu-btn p-2 drop-shadow-md bg-slate-900/50 rounded-lg">
                   <Menu size={28} />
                 </button>
               </SheetTrigger>

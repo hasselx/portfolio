@@ -52,6 +52,7 @@ export function DottedMap({
       viewBox={`0 0 ${width} ${height}`}
       className={cn("text-slate-700/40", className)}
       style={{ width: "100%", height: "100%", ...style }}
+      overflow="hidden"
       {...svgProps}
     >
       {points.map((point, index) => {

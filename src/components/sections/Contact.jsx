@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { portfolioData } from '../../data/portfolioData';
 import SectionWrapper from '../ui/SectionWrapper';
@@ -23,18 +23,45 @@ const mapMarkers = [
 
 const Contact = () => {
   const [hovered, setHovered] = useState(false);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const centerMap = () => {
+      if (scrollRef.current) {
+        const container = scrollRef.current;
+        container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
+      }
+    };
+    
+    // Attempt immediately
+    centerMap();
+    
+    // Ensure it triggers after all SVGs and Layout paints are complete
+    const timeoutId = setTimeout(centerMap, 250);
+    
+    window.addEventListener('resize', centerMap);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', centerMap);
+    };
+  }, []);
 
   return (
     <SectionWrapper id="contact">
-      {/* Dynamic Background SVG Map Layer */}
-      <div className="absolute inset-0 z-0 overflow-visible pointer-events-none scale-[2.5] sm:scale-[1.5] lg:scale-125 opacity-100 mix-blend-screen">
-        <div className="absolute inset-0 z-10" style={{ background: "radial-gradient(circle at center, transparent 15%, #0a192f 70%)" }} />
-        <DottedMap
-          markers={mapMarkers}
-          mapSamples={3500}
-          dotColor="rgba(255, 255, 255, 0.25)"
-          className="w-full h-full"
-          renderMarkerOverlay={({ marker, x, y, r, index }) => {
+      {/* Map Layer - Recognizable World Map, Scrollable on Mobile */}
+      <div 
+        ref={scrollRef}
+        className="absolute inset-0 z-0 overflow-x-auto overflow-y-hidden pointer-events-auto cursor-grab active:cursor-grabbing [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      >
+        {/* Set a minimum width so the map isn't squashed on mobile, allowing horizontal swiping */}
+        <div className="min-w-[800px] lg:min-w-full h-full opacity-60 pointer-events-none flex items-center justify-center">
+          <DottedMap
+            preserveAspectRatio="xMidYMid meet"
+            markers={mapMarkers}
+            mapSamples={1500}
+            dotColor="rgba(255, 255, 255, 0.4)"
+            className="w-full h-[60%] sm:h-[80%] lg:h-full object-contain"
+            renderMarkerOverlay={({ marker, x, y, r, index }) => {
             const { countryCode, label } = marker.overlay;
             const href = `https://flagcdn.com/w80/${countryCode}.webp`;
             const clipId = `flag-clip-${index}`;
@@ -78,10 +105,11 @@ const Contact = () => {
             );
           }}
         />
+        </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto flex flex-col items-center justify-center text-center pt-[140px] pb-[100px] sm:pt-[220px] sm:pb-[150px] relative z-20 mt-10">
-        <h2 className="text-5xl md:text-6xl font-black text-slate-100 mb-8 tracking-tight drop-shadow-md">Get In Touch</h2>
+      <div className="max-w-[1200px] mx-auto flex flex-col items-center justify-center text-center pt-[100px] pb-[80px] sm:pt-[220px] sm:pb-[150px] relative z-20 mt-2 sm:mt-10">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-100 mb-6 sm:mb-8 tracking-tight drop-shadow-md">Get In Touch</h2>
         
         <p className="text-slate-400 mb-10 text-lg md:text-xl leading-relaxed font-light max-w-[650px] mx-auto">
           Open to internships, research roles, and machine learning opportunities. Feel free to reach out for collaboration.

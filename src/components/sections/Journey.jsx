@@ -11,13 +11,13 @@ const TimelineSpine = () => {
     offset: ["start center", "end center"],
   });
   
-  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <div ref={ref} className="absolute left-[11px] top-6 bottom-0 w-[2px] bg-slate-700 z-0 overflow-hidden">
       <motion.div 
-        style={{ height }} 
-        className="absolute left-0 right-0 top-0 bg-gradient-to-b from-transparent via-primary to-primary rounded-full shadow-[0_0_15px_rgba(6,182,212,0.8)]" 
+        style={{ scaleY, transformOrigin: "top" }} 
+        className="absolute inset-0 bg-gradient-to-b from-transparent via-primary to-primary rounded-full shadow-[0_0_15px_rgba(6,182,212,0.8)]" 
       />
     </div>
   );

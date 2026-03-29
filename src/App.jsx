@@ -15,7 +15,7 @@ import { ReactLenis } from '@studio-freight/react-lenis';
 function App() {
   return (
     <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothTouch: false }}>
-        <div className="relative min-h-screen bg-transparent text-slate-200 font-sans selection:bg-primary/30 selection:text-white">
+        <div className="relative min-h-screen bg-transparent text-slate-200 font-sans selection:bg-primary/30 selection:text-white overflow-x-hidden">
         
         {/* Global animated background */}
         <div className="fixed inset-0 z-[-1] pointer-events-none">
