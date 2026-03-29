@@ -65,11 +65,11 @@ const Journey = () => {
   return (
     <section id="journey" className="w-full relative bg-transparent text-slate-200 py-24 z-20 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 relative">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 relative lg:items-start">
           
           {/* Left Side: Sticky Header */}
           <div className="lg:w-1/3">
-            <div className="lg:sticky lg:top-[30vh]">
+            <div className="lg:sticky lg:top-1/2 lg:-translate-y-1/2">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-100">
                 The <span className="text-primary">journey</span> so far
               </h2>

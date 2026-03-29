@@ -49,7 +49,6 @@ const Projects = () => {
       </AnimatePresence>
 
       {/* Expanded Active Card Modal */}
-      <AnimatePresence>
         {active && typeof active === "object" ? (
           <div 
             className="fixed inset-0 flex items-end sm:items-center justify-center p-0 sm:p-8 z-[110] pointer-events-none"
@@ -58,8 +57,6 @@ const Projects = () => {
             
             {/* Modal Body: Bottom sheet on mobile, centered modal on desktop */}
             <motion.div
-              layoutId={active ? `card-${active.title}-${id}` : undefined}
-              exit={{ opacity: 0, y: 50, transition: { duration: 0.15 } }}
               ref={ref}
               className="w-full sm:max-w-3xl mx-auto h-[85dvh] sm:h-auto max-h-[85dvh] sm:max-h-[80vh] flex flex-col bg-[#0a192f] border-t sm:border border-slate-700 rounded-t-3xl sm:rounded-3xl overflow-hidden pointer-events-auto shadow-[0_-10px_40px_rgba(6,182,212,0.15)] sm:shadow-[0_0_40px_rgba(6,182,212,0.15)] relative overscroll-contain"
             >
@@ -76,7 +73,7 @@ const Projects = () => {
               </button>
 
               {/* Dynamic Image Header (Fixed Height) */}
-              <motion.div layoutId={`image-${active.title}-${id}`} className="shrink-0 w-full relative">
+              <motion.div className="shrink-0 w-full relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a192f] via-transparent to-black/30 bg-blend-multiply opacity-60 z-10 bottom-0 top-0 pointer-events-none"></div>
                 <img
                   src={active.image || active.preview}
@@ -161,8 +158,6 @@ const Projects = () => {
             </motion.div>
           </div>
         ) : null}
-      </AnimatePresence>
-
       {/* Default List View */}
       <ul className="max-w-[800px] mx-auto w-full flex flex-col gap-4">
         {portfolioData.projects.map((project) => (
