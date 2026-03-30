@@ -13,6 +13,7 @@ https://naveenkrishnanr.vercel.app/
 * Timeline for education and experience
 * Projects and publications showcase
 * Contact section with external links
+*Contact.jsx - pulse maker Toggle markers: 1 to turn on, 0 to turn off
 
 ## Tech Stack
 
