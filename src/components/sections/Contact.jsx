@@ -6,19 +6,23 @@ import mainAvatar from '../../static/avatar/icon2.jpg';
 import { ComicText } from '../ui/comic-text';
 import { DottedMap } from '../ui/dotted-map';
 
+// Toggle markers: 1 to turn on, 0 to turn off
+const SHOW_KERALA = 1;
+const SHOW_TRIER = 0;
+
 const mapMarkers = [
-  {
+  ...(SHOW_KERALA ? [{
     lat: 8.5241,
     lng: 76.9366,
     size: 2.0,
     overlay: { countryCode: "in", label: "Kerala", align: "left" },
-  },
-  {
+  }] : []),
+  ...(SHOW_TRIER ? [{
     lat: 49.7596,
     lng: 6.6441,
     size: 2.0,
     overlay: { countryCode: "de", label: "Trier", align: "right" },
-  },
+  }] : []),
 ];
 
 const Contact = () => {
