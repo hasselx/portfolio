@@ -7,8 +7,8 @@ import { ComicText } from '../ui/comic-text';
 import { DottedMap } from '../ui/dotted-map';
 
 // Toggle markers: 1 to turn on, 0 to turn off
-const SHOW_KERALA = 1;
-const SHOW_TRIER = 0;
+const SHOW_KERALA = 0;
+const SHOW_TRIER = 1;
 
 const mapMarkers = [
   ...(SHOW_KERALA ? [{
