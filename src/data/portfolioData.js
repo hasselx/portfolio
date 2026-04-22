@@ -1,3 +1,4 @@
+import mastersImg from '../static/Education/masters.png';
 import btechImg from '../static/Education/btechlogo.png';
 import higherSecImg from '../static/Education/higher secondary logo.png';
 import secImg from '../static/Education/secondary logo.png';
@@ -24,6 +25,13 @@ export const portfolioData = {
     projects: 5
   },
   education: [
+    {
+      degree: "Master's in Natural Language Processing",
+      institution: "Universitat Trier",
+      duration: "2026 — Present",
+      link: "https://www.uni-trier.de/en/",
+      preview: mastersImg
+    },
     {
       degree: "B.Tech in Electronics and Computer Engineering",
       institution: "Amrita Vishwa Vidyapeetham",
