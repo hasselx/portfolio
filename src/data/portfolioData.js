@@ -160,6 +160,6 @@ export const portfolioData = {
     email: "nkrnaveen385@gmail.com",
     github: "https://github.com/hasselx",
     linkedin: "https://linkedin.com/in/nkrnaveen385",
-    heypage: "https://heypage.online/hasselx"
+    heypage: "https://heypage.online/naveen"
   }
 };

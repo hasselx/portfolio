@@ -141,7 +141,7 @@ const Contact = () => {
               setTimeout(() => setHovered(false), 2000);
             }}
           >
-            <a href="https://www.heypage.online/hasselx?ref=portfolio&type=redirect" target="_blank" rel="noopener noreferrer" className="block focus:outline-none">
+            <a href="https://www.heypage.online/naveen?ref=portfolio&type=redirect" target="_blank" rel="noopener noreferrer" className="block focus:outline-none">
               <img 
                 src={mainAvatar} 
                 alt="Naveen krishnan R" 
